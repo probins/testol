@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>OpenLayers 4326 WMTS</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" type="text/css">
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+    <script>
+      (() => {
+        const OLVersion = new URLSearchParams(window.location.search).get('v');
+        let s = document.createElement('script');
+        s.type = 'importmap';
+        const code = {
+          "imports": {
+            "ol/": `https://cdn.jsdelivr.net/gh/openlayers/openlayers@${OLVersion}/src/ol/`,
+            "rbush": "https://jspm.dev/npm:rbush@3.0.1!cjs",
+            "rbush/rbush.js": "https://jspm.dev/npm:rbush@3.0.1!cjs"
+          }
+        };
+        s.appendChild(document.createTextNode(JSON.stringify(code, null, '\t')));
+        document.head.appendChild(s);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script type="module" src="./wmts4326.js"></script>
+  </body>
+</html>
